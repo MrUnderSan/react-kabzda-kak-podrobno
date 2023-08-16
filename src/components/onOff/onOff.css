@@ -1,0 +1,20 @@
+
+.on-off {
+    margin-top: 20px;
+    display: flex;
+    gap: 5px;
+}
+
+.switch {
+    width: 60px;
+    height: 30px;
+    border: 1px solid black;
+    text-align: center;
+}
+
+.circle {
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    border: 1px solid black;
+}
