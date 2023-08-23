@@ -9,14 +9,14 @@ import {UncontrolledRating} from './components/UncontrolledRating/UncontrolledRa
 function App() {
     return (
         <div>
-            <Accordion title="title 1" collapsed/>
-            <Accordion title="title 2" collapsed={false}/>
-            <Rating value={3}/>
-            <OnOff />
-            <OnOff />
 
-            <UncontrolledAccordion title="Uncontrolled Accordion"/>
+            {/*<Accordion title="title 1" collapsed/>*/}
+            {/*<Accordion title="title 2" collapsed={false}/>*/}
+            {/*<Rating value={3}/>*/}
+
+            <OnOff />
             <UncontrolledRating />
+            <UncontrolledAccordion title="Uncontrolled Accordion"/>
         </div>
     );
 
