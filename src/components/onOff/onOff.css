@@ -10,9 +10,10 @@
     height: 30px;
     border: 1px solid black;
     text-align: center;
+    cursor: pointer;
 }
 
-.circle {
+.bulb {
     width: 30px;
     height: 30px;
     border-radius: 100%;
