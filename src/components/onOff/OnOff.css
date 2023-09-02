@@ -1,0 +1,21 @@
+
+.on-off {
+    margin: 20px 0 20px;
+    display: flex;
+    gap: 5px;
+}
+
+.switch {
+    width: 60px;
+    height: 30px;
+    border: 1px solid black;
+    text-align: center;
+    cursor: pointer;
+}
+
+.bulb {
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    border: 1px solid black;
+}

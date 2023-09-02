@@ -1,12 +1,9 @@
-import './OnOff.css'
-import React from 'react';
+import './UncontrolledOnOff.css'
+import {useState} from 'react';
 
-type PropsType = {
-    onOff: boolean
-    setOnOff: (s: boolean) => void
-}
+export const UncontrolledOnOff = () => {
 
-export const OnOff: React.FC<PropsType> = ({onOff, setOnOff}) => {
+    const [onOff, setOnOff] = useState(false)
 
     const onStyle = {
         backgroundColor: `${onOff ? 'green' : 'white'}`
@@ -14,6 +11,10 @@ export const OnOff: React.FC<PropsType> = ({onOff, setOnOff}) => {
 
     const offStyle = {
         backgroundColor: `${!onOff ? 'red' : 'white'}`
+    }
+
+    const bulbStyle = {
+        backgroundColor: `${onOff ? 'green' : 'red'}`
     }
 
     const onOnClickHandler = () => {
@@ -36,7 +37,7 @@ export const OnOff: React.FC<PropsType> = ({onOff, setOnOff}) => {
                  onClick={onOffClickHandler}
             >off
             </div>
-            <div className={'bulb'} style={onStyle}></div>
+            <div className={'bulb'} style={bulbStyle}></div>
         </div>
     )
 }
