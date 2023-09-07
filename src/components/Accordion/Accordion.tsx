@@ -1,12 +1,13 @@
 import React from 'react';
 
 type AccordionPropsType = {
-    title: string,
+    title: string
     accordionCollapsed: boolean
     setAccordionCollapsed: (c: boolean)=>void
 }
 
 export function Accordion(props: AccordionPropsType) {
+
     return (
         <>
             <AccordionTitle
