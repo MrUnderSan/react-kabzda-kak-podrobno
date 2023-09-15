@@ -1,8 +1,8 @@
 import type {Meta} from '@storybook/react';
 import {action} from '@storybook/addon-actions'
-import { Accordion } from './Accordion';
+import {Accordion} from './Accordion';
 import {useState} from 'react';
-import {bool, string} from 'prop-types';
+import {array, bool, func, string} from 'prop-types';
 
 const meta: Meta<typeof Accordion> = {
     title: 'Components/Accordion',
@@ -17,11 +17,9 @@ const meta: Meta<typeof Accordion> = {
     argTypes: {
         title: string,
         accordionCollapsed: bool,
-        setAccordionCollapsed: ()=>{}
-    },
-    args: {
-        title: 'gfghhteht',
-        accordionCollapsed: false
+        setAccordionCollapsed: func,
+        items: array,
+        onClick: func
     }
 
 } satisfies Meta<typeof Accordion>;
@@ -30,15 +28,44 @@ export default meta;
 
 const setAccordionCollapsedHandler = action('on change')
 
+const onClickHandler = action('some item was clicked')
+
+const items = [
+    {title: 'Dimych', value: 1},
+    {title: 'Valera', value: 2},
+    {title: 'Artem', value: 3},
+    {title: 'Viktor', value: 4}
+]
+export const ChangeableAccordion = () => {
+    const [collapsed, setCollapsed] = useState(false)
+    return <Accordion
+        title={'Changeable Accordion'}
+        accordionCollapsed={collapsed}
+        setAccordionCollapsed={() => {
+            setCollapsed(!collapsed)
+        }}
+        items={items}
+        onClick={onClickHandler}
+    />
+}
+
 export const CollapsedAccordion = () => {
-    return <Accordion title={'Collapsed Accordion'} accordionCollapsed={true} setAccordionCollapsed={setAccordionCollapsedHandler} />
+    return <Accordion
+        title={'Collapsed Accordion'}
+        accordionCollapsed={true}
+        setAccordionCollapsed={setAccordionCollapsedHandler}
+        items={[]}
+        onClick={onClickHandler}
+    />
 }
 
 export const OpenedAccordion = () => {
-    return <Accordion title={'Opened Accordion'} accordionCollapsed={false} setAccordionCollapsed={()=>{}} />
-}
-
-export const ChangeableAccordion = () => {
-    const [collapsed, setCollapsed] = useState(false)
-    return <Accordion title={'Changeable Accordion'} accordionCollapsed={collapsed} setAccordionCollapsed={()=>{setCollapsed(!collapsed)}} />
+    return <Accordion
+        title={'Opened Accordion'}
+        accordionCollapsed={false}
+        setAccordionCollapsed={() => {
+        }}
+        items={items}
+        onClick={onClickHandler}
+    />
 }

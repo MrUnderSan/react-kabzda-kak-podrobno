@@ -19,12 +19,25 @@ function App() {
         setRating(v)
     }
 
+    const items = [
+        {title: 'Dimych', value: 1},
+        {title: 'Valera', value: 2},
+        {title: 'Artem', value: 3},
+        {title: 'Viktor', value: 4}
+    ]
+
     return (
         <div>
             <div>Controlled:</div>
             <OnOff onOff={onOff} setOnOff={setOnOff}/>
             <Rating value={rating} changeRating={changeRating}/>
-            <Accordion title="title 1" accordionCollapsed={accordionCollapsed} setAccordionCollapsed={setAccordionCollapsed}/>
+            <Accordion
+                title="title 1"
+                accordionCollapsed={accordionCollapsed}
+                setAccordionCollapsed={setAccordionCollapsed}
+                items={items}
+                onClick={(v: any)=>{}}
+            />
 
 
             <div>Uncontrolled:</div>
