@@ -27,12 +27,23 @@ const meta: Meta<typeof Select> = {
 export default meta;
 
 const items = [
-    {title: "Minsk", value: 1},
-    {title: "Kiev", value: 2},
-    {title: "Moscow", value: 3},
+    {title: 'Minsk', value: 1},
+    {title: 'Kiev', value: 2},
+    {title: 'Moscow', value: 3},
 ]
 
-export const ChangeableAccordion = () => {
+export const SelectFirstItem = () => {
+
+    const [value, setValue] = useState<number | undefined>(1)
+
+    const onChangeHandler = (v: number) => {
+        setValue(v)
+    }
+
+    return <Select items={items} value={value} onChange={onChangeHandler}/>
+}
+
+export const WithoutSelection = () => {
 
     const [value, setValue] = useState<number | undefined>(undefined)
 
@@ -40,5 +51,5 @@ export const ChangeableAccordion = () => {
         setValue(v)
     }
 
-    return <Select items={items} value={value} onChange={onChangeHandler} />
+    return <Select items={items} value={value} onChange={onChangeHandler}/>
 }

@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
-import './Select.css'
+import React, {useState, KeyboardEvent, useEffect} from 'react';
+import styles from './Select.module.css'
 
-export type ItemsType ={
+export type ItemsType = {
     title: string
     value: any
 }
@@ -15,7 +15,13 @@ type PropsType = {
 export const Select = (props: PropsType) => {
     const [isCollapsed, setIsCollapsed] = useState(true)
 
+    const [hoveredItem, setHoveredItem] = useState(props.value)
+
     const currentValue = props.items.find(i => i.value === props.value)?.title
+
+    useEffect(() => {
+        setHoveredItem(props.value)
+    }, [props.value])
 
     const itemsRender = props.items.map(i => {
         const onClickItem = () => {
@@ -23,11 +29,16 @@ export const Select = (props: PropsType) => {
             setIsCollapsed(true)
         }
 
+        const onMouseEnterHandler = () => {
+            setHoveredItem(i.value)
+        }
+
         return (
             <li
                 key={i.value}
-                className={'select-li'}
+                className={styles.selectLi + ' ' + (i.value === hoveredItem ? styles.hovered : '')}
                 onClick={onClickItem}
+                onMouseEnter={onMouseEnterHandler}
             >{i.title}</li>
         )
     })
@@ -36,11 +47,37 @@ export const Select = (props: PropsType) => {
         setIsCollapsed(false)
     }
 
+    const onKeyDownHandler = (e: KeyboardEvent<HTMLDivElement>) => {
+        if (!props.items[props.value - 1] && (e.key === 'ArrowDown' || e.key === 'ArrowUp')) {
+            props.onChange(1)
+        }
+        if (e.key === 'ArrowDown') {
+            props.items[props.value] && props.onChange(props.value + 1)
+            return
+        }
+        if (e.key === 'ArrowUp') {
+            props.items[props.value - 2] && props.onChange(props.value - 1)
+            return;
+        }
+
+        if (e.key === 'Enter' || e.key === 'Escape') {
+            setIsCollapsed(true)
+        }
+    }
+
     return (
-        <div className={'select-wrapper'}>
-            {isCollapsed
-                ? <div className={'select-current'} onClick={onClickCurrentValue}>{currentValue ? currentValue : 'make a choice'}</div>
-                : <ul className={'select-ul'}>{itemsRender}</ul>}
+        <div className={styles.selectWrapper}>
+            <div
+                className={styles.selectCurrent}
+                onClick={onClickCurrentValue}
+                onKeyDown={onKeyDownHandler}
+                tabIndex={0}
+            >{currentValue ? currentValue : ''}</div>
+            {!isCollapsed && (
+                <div className={styles.selectUlWrapper}>
+                    <ul className={styles.selectUl}>{itemsRender}</ul>
+                </div>
+            )}
         </div>
     );
 };
