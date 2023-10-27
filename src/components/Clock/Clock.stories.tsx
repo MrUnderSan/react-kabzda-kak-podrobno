@@ -22,3 +22,10 @@ export const AnalogExample = () => {
         <Clock mode={'analog'} />
     </time>
 }
+
+
+export const CombinedExample = () => {
+    return <time>
+        <Clock mode={'combined'} />
+    </time>
+}
